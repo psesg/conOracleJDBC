@@ -1,10 +1,13 @@
 
 import jaydebeapi
 import pandas as pd
+import platform
 
-
+if platform.system() == "Linux":
+    jarFile = '/home/demipt2/ojdbc8.jar'
+if platform.system() == "Windows":
+    jarFile = r'C:\sqldeveloper\jdbc\lib\ojdbc8.jar'
 dirver = 'oracle.jdbc.driver.OracleDriver'
-jarFile = r'C:\sqldeveloper\jdbc\lib\ojdbc8.jar'
 addr_ = 'de-oracle.chronosavant.ru' + ':' + '1521' + '/' + 'deoracle'
 url = 'jdbc:oracle:thin:@' + addr_
 #print('url', url)
