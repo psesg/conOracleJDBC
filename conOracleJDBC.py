@@ -7,7 +7,7 @@ dirver = 'oracle.jdbc.driver.OracleDriver'
 jarFile = r'C:\sqldeveloper\jdbc\lib\ojdbc8.jar'
 addr_ = 'de-oracle.chronosavant.ru' + ':' + '1521' + '/' + 'deoracle'
 url = 'jdbc:oracle:thin:@' + addr_
-print('url', url)
+#print('url', url)
 DBUser = 'demipt2'
 DBPwd = 'peregrintook'
 conn = jaydebeapi.connect(dirver, url, [DBUser, DBPwd], jarFile)
