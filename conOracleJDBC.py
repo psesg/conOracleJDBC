@@ -1,11 +1,23 @@
-
-import jaydebeapi
-import pandas as pd
+import os
 import platform
+import sys
+import pandas as pd
+import jaydebeapi
 
-if platform.system() == "Linux":
+plat = platform.system()
+print("Common info:\nOS name:\t{}\nplatform:\t{}\nversion:\t{}\nrelease:\t{}\nPython v.:\t{}.{}.{}\n".format(
+    os.name,
+    plat,
+    platform.version(),
+    platform.release(),
+    sys.version_info.major,
+    sys.version_info.minor,
+    sys.version_info.micro
+))
+
+if plat == "Linux":
     jarFile = '/home/demipt2/ojdbc8.jar'
-if platform.system() == "Windows":
+if plat == "Windows":
     jarFile = r'C:\sqldeveloper\jdbc\lib\ojdbc8.jar'
 dirver = 'oracle.jdbc.driver.OracleDriver'
 addr_ = 'de-oracle.chronosavant.ru' + ':' + '1521' + '/' + 'deoracle'
@@ -13,6 +25,8 @@ url = 'jdbc:oracle:thin:@' + addr_
 #print('url', url)
 DBUser = 'demipt2'
 DBPwd = 'peregrintook'
+
+print("geting info from database: {}".format(url))
 conn = jaydebeapi.connect(dirver, url, [DBUser, DBPwd], jarFile)
 #sql_str = "select 'oracle' from dual"
 sql_str = "select ID_MODEL, NAME_MODEL, YEAR_ISSUE from pana_models"
