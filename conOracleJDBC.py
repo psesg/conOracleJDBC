@@ -17,6 +17,7 @@ print("Common info:\nOS name:\t{}\nplatform:\t{}\nversion:\t{}\nrelease:\t{}\nPy
 
 if plat == "Linux":
     jarFile = '/home/demipt2/ojdbc8.jar'
+    print("Unix-specific info: {}".format(platform.linux_distribution()))
 if plat == "Windows":
     jarFile = r'C:\sqldeveloper\jdbc\lib\ojdbc8.jar'
 dirver = 'oracle.jdbc.driver.OracleDriver'
