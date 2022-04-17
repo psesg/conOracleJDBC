@@ -27,7 +27,7 @@ url = 'jdbc:oracle:thin:@' + addr_
 DBUser = 'demipt2'
 DBPwd = 'peregrintook'
 
-print("geting info from database: {}".format(url))
+print("\ngeting info from database: {}...\n".format(url))
 conn = jaydebeapi.connect(dirver, url, [DBUser, DBPwd], jarFile)
 #sql_str = "select 'oracle' from dual"
 sql_str = "select ID_MODEL, NAME_MODEL, YEAR_ISSUE from pana_models"
