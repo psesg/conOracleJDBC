@@ -5,7 +5,7 @@ import pandas as pd
 import jaydebeapi
 
 plat = platform.system()
-print("Common info:\nOS name:\t{}\nplatform:\t{}\nversion:\t{}\nrelease:\t{}\nPython v.:\t{}.{}.{}\n".format(
+print("Common info:\nOS name:\t{}\nplatform:\t{}\nversion:\t{}\nrelease:\t{}\nPython v.:\t{}.{}.{}".format(
     os.name,
     plat,
     platform.version(),
