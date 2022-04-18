@@ -29,6 +29,8 @@ DBPwd = 'peregrintook'
 
 print("\ngeting info from database: {}...\n".format(url))
 conn = jaydebeapi.connect(dirver, url, [DBUser, DBPwd], jarFile)
+conn.jconn.setAutoCommit(False)
+
 #sql_str = "select 'oracle' from dual"
 sql_str = "select ID_MODEL, NAME_MODEL, YEAR_ISSUE from pana_models"
 #df = pd.read_sql_query(sql_str, conn)
