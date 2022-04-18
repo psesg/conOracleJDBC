@@ -45,7 +45,7 @@ finally:
     print("inserted {} rows".format(curs.rowcount))
 
 print("\ngeting info from database: {}...\n".format(url))
-sql_str = "select * from PANA_MANUFACTORY"
+sql_str = "select * from PANA_MANUFACTORY order by ID_MANUFACTORY asc"
 curs.execute(sql_str)
 df = pd.DataFrame(curs.fetchall(), columns = [ x[0] for x in curs.description])
 print(df)
