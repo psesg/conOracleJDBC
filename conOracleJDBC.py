@@ -4,6 +4,9 @@ import sys
 import pandas as pd
 import jaydebeapi
 
+pd.set_option("display.max_columns", 200)
+# pd.set_option("expand_frame_repr", True)
+
 plat = platform.system()
 print("Common info:\nOS name:\t{}\nplatform:\t{}\nversion:\t{}\nrelease:\t{}\nPython v.:\t{}.{}.{}".format(
     os.name,
@@ -26,24 +29,36 @@ url = 'jdbc:oracle:thin:@' + addr_
 #print('url', url)
 DBUser = 'demipt2'
 DBPwd = 'peregrintook'
-
-print("\ngeting info from database: {}...\n".format(url))
 conn = jaydebeapi.connect(dirver, url, [DBUser, DBPwd], jarFile)
 conn.jconn.setAutoCommit(False)
-
-#sql_str = "select 'oracle' from dual"
-sql_str = "select ID_MODEL, NAME_MODEL, YEAR_ISSUE from pana_models"
-#df = pd.read_sql_query(sql_str, conn)
-#df.head()
-#print(df)
 curs = conn.cursor()
+
+sql_str = "insert into demipt2.PANA_MANUFACTORY (ID_MANUFACTORY, MANUFACTORY) Values(6, 'Жигули')"
+print("\ninserting to  database...\n'{}'".format(sql_str))
+try:
+    curs.execute(sql_str)
+except Exception as e:
+    print("Error insertion:{}".format(e))
+else:
+    conn.commit()
+finally:
+    print("inserted {} rows".format(curs.rowcount))
+
+print("\ngeting info from database: {}...\n".format(url))
+sql_str = "select * from PANA_MANUFACTORY"
 curs.execute(sql_str)
-
-df = pd.DataFrame(curs.fetchall(), columns=['ID_MODEL', 'NAME_MODEL', 'YEAR_ISSUE'])
-#df.reset_index(drop=True, inplace=True)
-#df.index = df['ID_MODEL']
-
+df = pd.DataFrame(curs.fetchall(), columns = [ x[0] for x in curs.description])
 print(df)
-#print(curs.fetchall())
+
+sql_str = "delete from demipt2.PANA_MANUFACTORY WHERE ID_MANUFACTORY =  6"
+print("\ndeleting from  database...\n'{}'".format(sql_str))
+try:
+    curs.execute(sql_str)
+except Exception as e:
+    print("Error insertion:{}".format(e))
+else:
+    conn.commit()
+finally:
+    print("deleted {} rows".format(curs.rowcount))
 curs.close()
 conn.close()
