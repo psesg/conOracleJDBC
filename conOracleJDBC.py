@@ -3,9 +3,9 @@ import platform
 import sys
 import pandas as pd
 import jaydebeapi
+from sqlalchemy import types
 
 pd.set_option("display.max_columns", 200)
-# pd.set_option("expand_frame_repr", True)
 
 plat = platform.system()
 print("Common info:\nOS name:\t{}\nplatform:\t{}\nversion:\t{}\nrelease:\t{}\nPython v.:\t{}.{}.{}".format(
@@ -49,6 +49,8 @@ sql_str = "select * from PANA_MANUFACTORY order by ID_MANUFACTORY asc"
 curs.execute(sql_str)
 df = pd.DataFrame(curs.fetchall(), columns = [ x[0] for x in curs.description])
 print(df)
+
+dtyp = {c:types.VARCHAR(df[c].str.len().max()) for c in df.columns[df.dtypes == 'object'].tolist()}
 
 sql_str = "delete from demipt2.PANA_MANUFACTORY WHERE ID_MANUFACTORY =  6"
 print("\ndeleting from  database...\n'{}'".format(sql_str))
